@@ -5,6 +5,7 @@ import { AuthLayout } from "./auth/layout/AuthLayout";
 import { LoginPage } from "./auth/pages/LoginPage";
 import { RegisterPage } from "./auth/pages/RegisterPage";
 import { sleep } from "./lib/sleep";
+import { PrivateRoute } from "./auth/components/PrivateRoute";
 
 const ChatLayout = lazy( async () => {
   await sleep(1500);
@@ -35,8 +36,10 @@ export const AppRouter = () => {
                 <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
               </div>
             }
-          >
-            <ChatLayout />
+          > 
+            <PrivateRoute isAuthenticated={false}>
+              <ChatLayout />
+            </PrivateRoute>
           </Suspense>
         }>
           <Route index element={<NoChatSelectedPage/>}/>
